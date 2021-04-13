@@ -11,57 +11,40 @@
 // Display the values of each array as unordered lists in the browser
 // Calculating the sum of these hourly totals; your output for each location should look like this:
 
-// Seattle
 
-// 6am: 16 cookies
-// 7am: 20 cookies
-// 8am: 35 cookies
-// 9am: 48 cookies
-// 10am: 56 cookies
-// 11am: 77 cookies
-// 12pm: 93 cookies
-// 1pm: 144 cookies
-// 2pm: 119 cookies
-// 3pm: 84 cookies
-// 4pm: 61 cookies
-// 5pm: 23 cookies
-// 6pm: 42 cookies
-// 7pm: 57 cookies
-// Total: 875 cookies
-
-const shop1 = {
-  city: 'Seattle',
-  minCust = 23,
-  maxCust = 65,
-  avgCookie = 6.3,
+const Seattle = {
+  name: 'Seattle',
+  minCust: 23,
+  maxCust: 65,
+  avgCookie: 6.3,
 }
 
-const shop2 = {
-  city: 'Tokyo',
-  minCust = 3,
-  maxCust = 24,
-  avgCookie = 1.2,
+const Tokyo = {
+  name: 'Tokyo',
+  minCust: 3,
+  maxCust: 24,
+  avgCookie: 1.2,
 }
 
-const shop3 = {
-  city: 'Dubai',
-  minCust = 11,
-  maxCust = 38,
-  avgCookie = 3.7,
+const Dubai = {
+  name: 'Dubai',
+  minCust: 11,
+  maxCust: 38,
+  avgCookie: 3.7,
 }
 
-const shop4 = {
-  city: 'Paris',
-  minCust = 20,
-  maxCust = 38,
-  avgCookie = 2.3,
+const Paris = {
+  name: 'Paris',
+  minCust: 20,
+  maxCust: 38,
+  avgCookie: 2.3,
 }
 
-const shop1 = {
-  city: 'Lima',
-  minCust = 2,
-  maxCust = 16,
-  avgCookie = 4.6,
+const Lima = {
+  name: 'Lima',
+  minCust: 2,
+  maxCust: 16,
+  avgCookie: 4.6,
 }
 
 
@@ -69,12 +52,13 @@ const shop1 = {
 function hourString(hour){
 
   let timeXM = '';
+  let timeNum = 0;
   let result = '';
 
   if (hour < 7){
-    time = i + 6;
+    timeNum = hour + 6;
   }else{
-    time = i - 6;
+    timeNum = hour - 6;
   }
 
   if (hour < 6){
@@ -91,7 +75,6 @@ function hourString(hour){
 //uses Math.floor to make sure we don't sell partials cookie bits because that seems wrong
 function hourlyCookieCounter(min, max, avg){
 
-  let cookieCount = 0;
   let customerCount = Math.floor(Math.random()*(max - min + 1) + min);
   let cookieCount = Math.floor(customerCount * avg);
 
@@ -117,11 +100,49 @@ function dailyTraffic(min, max, avg){
     let currentCookies = hourlyCookieCounter(min, max, avg);
     cookieTotal += currentCookies;
 
-    let thisHour = '$(theTime): $(currentCookies) cookies';
+    let thisHour = theTime+': '+currentCookies+' cookies';
     hourlyArray.push(thisHour);
   }
   
   // add in total as last item
-  hourlyArray.push('Total: $(cookieTotal) cookies');
+  hourlyArray.push('Total: ' +cookieTotal+ ' cookies');
+
+  return hourlyArray;
+}
+
+//Setting up the printing out of city sales by creating pointer to display area
+const citiesPointer = document.getElementById('theSales');
+let cityArray = [Seattle, Tokyo, Dubai, Paris, Lima];
+
+//Do this for every city
+for (let i = 0; i < cityArray.length; i++){
+
+  const cityArticle = document.createElement('article');
+  citiesPointer.appendChild(cityArticle);
+  let thisCity = cityArray[i];
+
+  //Create City Names
+  const cityHighlight = document.createElement('h2');
+  cityHighlight.textContent = thisCity.name;
+  cityArticle.appendChild(cityHighlight);
+
+  //Create the list item and place it on the DOM tree, lab instructions say specifically unordered lists
+  const cityUL = document.createElement('ul');
+  cityArticle.appendChild(cityUL);
+
+  //Setup for the dailyTraffic function
+  let thisMin = cityArray[i].minCust;
+  let thisMax = cityArray[i].maxCust;
+  let thisAvg = cityArray[i].avgCookie;
+
+  let salesArray = dailyTraffic(thisMin, thisMax, thisAvg);
+
+  for (let j = 0; j < salesArray.length; j++) {
+
+    // Create and store line items in the correct locations
+    const cityLI = document.createElement('li');
+    cityLI.textContent = salesArray[j];
+    cityUL.appendChild(cityLI);
+  }
 
 }
