@@ -1,0 +1,57 @@
+/* 
+A custom Google font for highlights
+
+A specified standard sans-serif web font for data (such as Arial, Verdana, or Helvetica) (aka ul)
+font-family: 'Lato', sans-serif;
+
+A specified standard serif web font for text (such as Georgia, Times, etc.)
+
+
+Specified different font colors for all three font usages
+
+Colors taken from the Salmon Image
+Dark brown #33322a
+muted pinkish brown #a06342
+light orange #c78e5a
+light grey #d1c6bc
+dark grey #787a6f
+green #707255
+
+*/
+body {
+  background-color: #a06342;
+}
+
+article {
+  background-color: #c78e5a;
+}
+
+title {
+  font-family: 'Open Sans', sans-serif;
+  color: #33322a;
+}
+
+h2 {
+  font-family: 'PT Serif', serif;
+  color: brown;
+}
+
+ul {
+  font-family: 'Lato', sans-serif;
+  color: black;
+}
+
+.topnav {
+  background-color: #333;
+  overflow: hidden;
+}
+
+/* Style the links inside the navigation bar */
+.topnav a {
+  float: left;
+  color: #f2f2f2;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+  font-size: 17px;
+}

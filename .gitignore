@@ -1,0 +1,12 @@
+
+#This is what was suggested in the setting up a project instructions. It seems geared to Mac, and there is a non zero chance that causes problems for me.
+
+# Mac OS files
+.DS_Store
+
+# Logs
+logs
+*.log
+
+# Optional eslint cache
+.eslintcache
