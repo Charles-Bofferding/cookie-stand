@@ -11,138 +11,157 @@
 // Display the values of each array as unordered lists in the browser
 // Calculating the sum of these hourly totals; your output for each location should look like this:
 
-
-const Seattle = {
-  name: 'Seattle',
-  minCust: 23,
-  maxCust: 65,
-  avgCookie: 6.3,
+function Shop (name, minCust, maxCust, avgCookie) {
+  this.name = name;
+  this.minCust = minCust;
+  this.maxCust = maxCust;
+  this.avgCookie = avgCookie;
 }
 
-const Tokyo = {
-  name: 'Tokyo',
-  minCust: 3,
-  maxCust: 24,
-  avgCookie: 1.2,
-}
+let seattle = new Shop('Seattle', 23, 65, 6.3);
+let tokyo = new Shop('Tokyo', 3, 24, 1.2);
+let dubai = new Shop('Dubai', 11, 38, 3.7);
+let paris = new Shop('Paris', 20, 38, 2.3);
+let lima = new Shop('Lima', 2, 16, 4.6);
 
-const Dubai = {
-  name: 'Dubai',
-  minCust: 11,
-  maxCust: 38,
-  avgCookie: 3.7,
-}
+//Operating Hours Array
+let hoursArray = ['6am', '7am', '8am', '9am', '10am', '11am', '12pm', '1pm', '2pm', '3pm', '4pm', '5pm', '6pm', '7pm'];
 
-const Paris = {
-  name: 'Paris',
-  minCust: 20,
-  maxCust: 38,
-  avgCookie: 2.3,
-}
-
-const Lima = {
-  name: 'Lima',
-  minCust: 2,
-  maxCust: 16,
-  avgCookie: 4.6,
-}
+//Set up array to help with totals calculation in tablesLastRow
+let cityArray = [seattle, tokyo, dubai, paris, lima];
 
 
-//Takes in the value of i from the daily traffic function and converts it into a string with the time in hours
-function hourString(hour){
-
-  let timeXM = '';
-  let timeNum = 0;
-  let result = '';
-
-  if (hour < 7){
-    timeNum = hour + 6;
-  }else{
-    timeNum = hour - 6;
-  }
-
-  if (hour < 6){
-    timeXM = 'am';
-  }else{
-    timeXM = 'pm';
-  }
-
-  result = timeNum+timeXM;
-  return result;
-}
-
-//Takes in min, max, and avg values to compute how many cookies are sold that hour
+//Takes in shop object to compute how many cookies are sold that hour
 //uses Math.floor to make sure we don't sell partials cookie bits because that seems wrong
-function hourlyCookieCounter(min, max, avg){
+Shop.prototype.hourlyCookieCounter = function(){
 
-  let customerCount = Math.floor(Math.random()*(max - min + 1) + min);
-  let cookieCount = Math.floor(customerCount * avg);
+  let customerCount = Math.floor(Math.random()*(this.maxCust - this.minCust + 1) + this.minCust);
+  let cookieCount = Math.floor(customerCount * this.avgCookie);
 
   return cookieCount;
-
 }
 
 
-//Returns an array that should have one item for each hourly sale of cookies and the last one being the total.
-//Will need to iterate through the returned array to get the final output we are looking for.
-function dailyTraffic(min, max, avg){
+//Gives the shop an array that is random values within given range defined by shop attributes
+Shop.prototype.dailyTraffic = function(){
   
   let hourlyArray = [];
   let cookieTotal = 0;
 
-  //6am to 7pm, because the shop closes at 8 there is no 8pm sales which means 14 entries
-  let operatingHours = 14;
-
-  //Return an array of "6pm: 42 cookies" type entries
-  for(let i = 0; i < operatingHours; i++){
-
-    let theTime = hourString(i);
-    let currentCookies = hourlyCookieCounter(min, max, avg);
+  //Return an array just cookie numbers
+  for(let i = 0; i < hoursArray.length; i++){
+    let currentCookies = this.hourlyCookieCounter();
+    hourlyArray.push(currentCookies);
     cookieTotal += currentCookies;
-
-    let thisHour = theTime+': '+currentCookies+' cookies';
-    hourlyArray.push(thisHour);
   }
   
   // add in total as last item
-  hourlyArray.push('Total: ' +cookieTotal+ ' cookies');
-
-  return hourlyArray;
+  hourlyArray.push(cookieTotal);
+  this.hourlyArray = hourlyArray;
 }
 
-//Setting up the printing out of city sales by creating pointer to display area
-const citiesPointer = document.getElementById('theSales');
-let cityArray = [Seattle, Tokyo, Dubai, Paris, Lima];
 
-//Do this for every city
-for (let i = 0; i < cityArray.length; i++){
+//Setting up the information required for the various render functions
+//Add things to tableElem, which is attached to "theSales" id
+const tableHere = document.getElementById('theSales');
+const tableStart = document.createElement('table');
+tableHere.appendChild(tableStart);
 
-  const cityArticle = document.createElement('article');
-  citiesPointer.appendChild(cityArticle);
-  let thisCity = cityArray[i];
+//Function to setup top row, with a blank space, a space for each hour, then a space for daily location total
+function tableFirstRow(){
 
-  //Create City Names
-  const cityHighlight = document.createElement('h2');
-  cityHighlight.textContent = thisCity.name;
-  cityArticle.appendChild(cityHighlight);
+  //Setup Table Header
+  const tableHeader = document.createElement('thead');
+  tableStart.appendChild(tableHeader);
 
-  //Create the list item and place it on the DOM tree, lab instructions say specifically unordered lists
-  const cityUL = document.createElement('ul');
-  cityArticle.appendChild(cityUL);
+  //Set up the table row
+  const tableRow = document.createElement('tr');
+  tableHeader.appendChild(tableRow);
 
-  //Setup for the dailyTraffic function
-  let thisMin = cityArray[i].minCust;
-  let thisMax = cityArray[i].maxCust;
-  let thisAvg = cityArray[i].avgCookie;
+  //One blank space
+  const blank1 = document.createElement('th');
+  blank1.textContent = '';
+  tableRow.appendChild(blank1);
 
-  let salesArray = dailyTraffic(thisMin, thisMax, thisAvg);
+  //Add an element for each hour of operation
+  for(let i = 0; i < hoursArray.length; i++){
+    const tableHeaderElem = document.createElement('th');
+    tableHeaderElem.textContent = hoursArray[i];
+    tableRow.appendChild(tableHeaderElem);
+  }
 
-  for (let j = 0; j < salesArray.length; j++) {
+  //Add element for Daily Location Total
+  const headerEnd = document.createElement('th');
+  headerEnd.textContent = 'Daily Location Total';
+  tableRow.appendChild(headerEnd);
 
-    // Create and store line items in the correct locations
-    const cityLI = document.createElement('li');
-    cityLI.textContent = salesArray[j];
-    cityUL.appendChild(cityLI);
+}
+
+//render function to add in a shop's info and create sales array in the shops
+Shop.prototype.render = function(){
+
+  //Create the hourly sales array
+  this.dailyTraffic();
+
+  //Set up the table row
+  const tableRow = document.createElement('tr');
+  tableStart.appendChild(tableRow);
+
+  //Add column to that which is the city name
+  const shopName = document.createElement('td');
+  shopName.textContent = this.name;
+  tableRow.appendChild(shopName);
+
+  //add columns to that for every item in the shop's hourlyArray
+  for (let i = 0; i < this.hourlyArray.length; i++){
+    const theHourSales = document.createElement('td');
+    theHourSales.textContent = this.hourlyArray[i];
+    tableRow.appendChild(theHourSales);
+  }
+}
+
+
+
+//function to sum together hourly totals and setup bottom row 
+function tableLastRow(){
+
+  //Setup Table Footer
+  const tableFooter = document.createElement('tfoot');
+  tableStart.appendChild(tableFooter);
+
+  //Set up the table row
+  const tableRow = document.createElement('tr');
+  tableFooter.appendChild(tableRow);
+
+  //One blank space
+  const totals = document.createElement('td');
+  totals.textContent = 'Totals';
+  tableRow.appendChild(totals);
+
+  //Add an element for each hour of operation, hoursArray.length + 1 because we need to also get the daily total which is an extra space and I don't want to try and pull the hourlyArray which has the total at the end because hoursArray is global and the others are scoped only in the shop objects
+  for(let i = 0; i < hoursArray.length + 1; i++){
+
+    let sum = 0;
+    const tableFooterInfo = document.createElement('td');
+
+    for (let j =0; j < cityArray.length; j++){
+      console.log(cityArray[j].hourlyArray[i]);
+      sum += cityArray[j].hourlyArray[i];
+    }
+
+    tableFooterInfo.textContent = sum;
+    tableRow.appendChild(tableFooterInfo);
+
   }
 
 }
+
+
+
+tableFirstRow();
+seattle.render();
+tokyo.render();
+dubai.render();
+paris.render();
+lima.render();
+tableLastRow();
