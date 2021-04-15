@@ -1,33 +1,20 @@
-<!-- In addition to the provided picture of the fish, your index.html file should contain:
+<!-- 
+Lab 8b requirements
 
-A custom Google font for highlights
-A specified standard sans-serif web font for data (such as Arial, Verdana, or Helvetica)
-A specified standard serif web font for text (such as Georgia, Times, etc.)
-Specified different font colors for all three font usages
-A background color for the default page background (make sure font colors have good contrast and are readable on this background)
-A different background color for elements such boxes and tables (so make sure the font colors contrast against this well, too!)
-Anything else you’d like to add related to style. But remember: simplicity, clarity, and consistency are good things in design.
-Be thoughtful about layout and overall organization of the page.
-Include all of the typical stuff that you’ll find on the home page of a business: locations, hours, contact information, some text about how awesome the business is, etc. Be creative, and again, think about what is meaningful to a typical end user.
-Developer Style Guide
-In addition to the requirements listed above, please ensure that your project also contains the following according to our style guide:
+locations with addresses,
+hours open
 
-For every lab within this project, you will be creating a new branch for every day. Create a new branch name that follows the following format class##-feature (example: class06-Objects).
-
-Within your local version of your repo, add your .gitignore and .eslintrc.json.
-
-While working within your non-master branch, conduct regular commits within git.
-
-All properties/values and methods should be correctly constructed and given meaningful names.
-
-Functions and methods should follow the single-responsibility principle.
-
-Use template literals in your JS logic to render the stores as lists on the sales page -->
+contact information
+Anything else you feel neccesary.
+A link to your sales.html page
+Be sure to also include a link to your index.html page on your sales.html pages as well.
+ -->
 
 <!DOCTYPE html>
 <html>
   <head>
     <title>Salmon Cookies</title>
+    <link href="css/reset.css" type="text/css" rel="stylesheet"/>
     <link href="css/style.css" type="text/css" rel="stylesheet"/>
 
     <div class="topnav">
@@ -38,20 +25,53 @@ Use template literals in your JS logic to render the stores as lists on the sale
   </head>
 
   <body>
-    <header>
-      <h1>Salmon Cookies</h1>
-      <h2>Just a little fishy</h2>
+    <header class = nameplate>
+      <img class = nameImageInv src="images/frosted-cookie.jpeg">
+      <div class = nameDiv>
+        <h1>Salmon Cookies</h1>
+        <h2>Just a little fishy</h2> 
+      </div>
+      <img class = nameImage src="images/frosted-cookie.jpeg">
     </header>
 
     <main>
-      <h2>Currently this is just for testing colors and a fish image</h2>
-      <img src="images/salmon.png" width=70%>
+      <h2>Come and visit one of our locations, we would love for you to come and meet our family! And then you can bring a delicious treat back to yours!</h2>
+      <div id = "familyDiv">
+        <img id = "familyImage" src="images/family.jpeg">
+        <table>
+          <tr>
+            <th>Store Location</th>
+            <th>Address</th>
+          </tr>
+          <tr>
+            <td>Seattle</td>
+            <td>4737 California Ave SW</td>
+          </tr>
+          <tr>
+            <td>Tokyo</td>
+            <td>2 Chome-4-16 Hiranokita, Hirano Ward</td>
+          </tr>
+          <tr>
+            <td>Dubai</td>
+            <td>28 16b St - Al QuozAl Quoz Industrial Area 3</td>
+          </tr>
+          <tr>
+            <td>Paris</td>
+            <td>86 Boulevard Beaumarchais, 75011</td>
+          </tr>
+          <tr>
+            <td>Lima</td>
+            <td>Psj, María E. Cabrejos 135</td>
+          </tr>
+        </table>
+      </div>
     </main>
 
     <footer>
-      <p>
-        Hours of Operation: 6am to 8pm
-      </p>
+      <h2>
+        Hours of Operation: 6am to 8pm all locations (local timezones) <br>
+        Please Contact Us at (100)-867-5309 for Global Sales
+      </h2>
     </footer>
     <!-- <script src="js/app.js"></script> -->
   </body>
