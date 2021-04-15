@@ -78,21 +78,25 @@ ul {
 }
 
 .nameImage {
-  width: auto;
-  margin: 15px;
+  width: 30%;
+  height: 30%;
+  margin: auto;
   border: solid 10px #a06342;
+
 }
 
 .nameImageInv {
-  width: auto;
-  margin: 15px;
+  width: 30%;
+  height: 30%;
+  margin: auto;
   transform: scaleX(-1);
   border: solid 10px #a06342;
+  
 }
 
 #familyImage {
   width: 50%;
-  height: auto;
+  height: 100%;
   float: left;
   margin: 15px;
 }
@@ -117,4 +121,12 @@ table th{
 
 table tf{
   border: 2px solid #33322a;
+}
+
+#theSales {
+  margin: 20px;
+}
+
+#formContainer{
+  text-align: center;
 }
