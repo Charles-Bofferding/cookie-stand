@@ -13,12 +13,13 @@ Colors taken from the Salmon Image
 Dark brown #33322a
 muted pinkish brown #a06342
 light orange #c78e5a
+
 light grey #d1c6bc
 dark grey #787a6f
 green #707255
 */
 body {
-  background-color: #a06342;
+  background-color: #c78e5a;
 }
 
 article {
@@ -30,9 +31,25 @@ title {
   color: #33322a;
 }
 
+h1 {
+  font-family: 'PT Serif', serif;
+  color: #33322a;
+  font-size: x-large;
+  margin: 15px;
+  margin-top: 30px;
+  text-align: center;
+  background-color: #a06342;
+  padding: 15px;
+}
+
 h2 {
   font-family: 'PT Serif', serif;
-  color: brown;
+  color: #33322a;
+  font-size: medium;
+  margin: 15px;
+  text-align: center;
+  background-color: #a06342;
+  padding: 15px;
 }
 
 ul {
@@ -41,7 +58,7 @@ ul {
 }
 
 .topnav {
-  background-color: #333;
+  background-color: #33322a;
   overflow: hidden;
 }
 
@@ -53,4 +70,51 @@ ul {
   padding: 14px 16px;
   text-decoration: none;
   font-size: 17px;
+}
+
+.nameplate {
+  display: flex;
+  flex-direction: row;
+}
+
+.nameImage {
+  width: auto;
+  margin: 15px;
+  border: solid 10px #a06342;
+}
+
+.nameImageInv {
+  width: auto;
+  margin: 15px;
+  transform: scaleX(-1);
+  border: solid 10px #a06342;
+}
+
+#familyImage {
+  width: 50%;
+  height: auto;
+  float: left;
+  margin: 15px;
+}
+
+#familyDiv {
+  height : 260px;
+}
+
+table {
+  text-align: center;
+  border: 3px solid #33322a;
+  margin: auto;
+}
+
+table td{
+  border: 1px solid #33322a;
+}
+
+table th{
+  border: 2px solid #33322a;
+}
+
+table tf{
+  border: 2px solid #33322a;
 }
