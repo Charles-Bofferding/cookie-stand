@@ -1,13 +1,13 @@
 /* 
 A custom Google font for highlights
-
-A specified standard sans-serif web font for data (such as Arial, Verdana, or Helvetica) (aka ul)
-font-family: 'Lato', sans-serif;
-
+A specified standard sans-serif web font for data (such as Arial, Verdana, or Helvetica)
 A specified standard serif web font for text (such as Georgia, Times, etc.)
-
-
 Specified different font colors for all three font usages
+A background color for the default page background (make sure font colors have good contrast and are readable on this background)
+A different background color for elements such boxes and tables (so make sure the font colors contrast against this well, too!)
+Anything else you’d like to add related to style. But remember: simplicity, clarity, and consistency are good things in design.
+Be thoughtful about layout and overall organization of the page.
+Include all of the typical stuff that you’ll find on the home page of a business: locations, hours, phone number, email address, some text about how awesome the business is, etc. Be creative, and again, think about what is meaningful to a typical end user.
 
 Colors taken from the Salmon Image
 Dark brown #33322a
@@ -28,13 +28,14 @@ article {
 
 title {
   font-family: 'Open Sans', sans-serif;
-  color: #33322a;
+  color: hsl(53, 10%, 18%);
+  font-size: 40px;
 }
 
 h1 {
   font-family: 'PT Serif', serif;
   color: #33322a;
-  font-size: x-large;
+  font-size: 2em;
   margin: 15px;
   margin-top: 30px;
   text-align: center;
@@ -45,8 +46,9 @@ h1 {
 h2 {
   font-family: 'PT Serif', serif;
   color: #33322a;
-  font-size: medium;
-  margin: 15px;
+  font-size: 1.5em;
+  margin-top: 15px;
+  margin-bottom: 15px;
   text-align: center;
   background-color: #a06342;
   padding: 15px;
@@ -96,13 +98,13 @@ ul {
 
 #familyImage {
   width: 50%;
-  height: 100%;
   float: left;
   margin: 15px;
 }
 
 #familyDiv {
-  height : 260px;
+  height : 350px;
+  align-items: baseline; 
 }
 
 table {
@@ -129,4 +131,12 @@ table tf{
 
 #formContainer{
   text-align: center;
+}
+
+legend {
+  border: 3px #33322a;
+}
+
+label {
+  border: 3px solid #33322a;
 }
